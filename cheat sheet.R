@@ -43,3 +43,4 @@ test <- babynames %>% mutate(percent = prop*100) %>%
 test2 <- babynames %>% group_by(sex) %>% summarise(count = n())
 
 #test
+#lei_test
