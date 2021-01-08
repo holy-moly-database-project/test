@@ -42,5 +42,13 @@ test <- babynames %>% mutate(percent = prop*100) %>%
   filter(sex == "M")
 test2 <- babynames %>% group_by(sex) %>% summarise(count = n())
 
+<<<<<<< HEAD
 #test
+<<<<<<< HEAD
 #lei_test_again
+=======
+#dddd
+=======
+#test1
+>>>>>>> 2d46860ba6ee9585620079456280e945ed0c7e1a
+>>>>>>> ead4e184ef655d2e8a27b39276f989be3cb2003e
