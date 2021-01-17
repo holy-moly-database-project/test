@@ -6,7 +6,7 @@
     </head>
     <body>
 
-        <h1>Routes</h1>
+        <h1>Airline</h1>
 
         <div class="content">
 
@@ -17,7 +17,30 @@
                 <button>Add Route</button>
             </form>
 
+            <form id="search-route-form">
+                <input type="text" name="id" placeholder="route ID">
+                <button>Search</button>
+            </form>
+
             <ul id="route-list"></ul>
+
+        </div>
+
+        <div class="content">
+
+            <form id="add-model-form">
+                <input type="text" name="id" placeholder="model ID">
+                <input type="text" name="seats" placeholder="number of seats">
+                <button>Add Model</button>
+            </form>
+
+            <form id="search-model-form">
+                <input type="text" name="id" placeholder="model ID">
+                <!-- <input type="text" name="seats" placeholder="number of seats"> -->
+                <button>Search</button>
+            </form>
+
+            <ul id="model-list"></ul>
 
         </div>
 
@@ -37,5 +60,6 @@
             db.settings({ timestampsInSnapshots: true });
         </script>
         <script src="app.js"></script>
+        <script src="model.js"></script>
     </body>
 </html>
