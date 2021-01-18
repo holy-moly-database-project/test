@@ -15,7 +15,7 @@ function renderModel(doc){
     cross.textContent = 'x';
 
     revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayRevise()");
+    revise.setAttribute("onclick", "displayModelRevise");
 
     li.appendChild(modelID);
     li.appendChild(seats);
@@ -67,12 +67,12 @@ function renderModel(doc){
     })
 }
 
-function displayRevise(){
-    let x = document.getElementById("reviseModelForm");
-    if (x.style.display === "none"){
-        x.style.display = "block";
+function displayModelRevise(){
+    let rmf = document.getElementById("reviseModelForm");
+    if (rmf.style.display === "none"){
+        rmf.style.display = "block";
     } else {
-        x.style.display = "none";
+        rmf.style.display = "none";
     }
 }
 

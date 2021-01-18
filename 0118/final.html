@@ -46,6 +46,27 @@
 
         </div>
 
+        <div class="content">
+
+            <form id="add-flight-form">
+                <h2>Flight</h2>
+                <input type="text" name="routeid" placeholder="route ID">
+                <input type="text" name="depDate" placeholder="departure date">
+                <input type="text" name="depTime" placeholder="departure time">
+                <input type="text" name="pilotid" placeholder="pilot ID">
+                <input type="text" name="planeid" placeholder="plane ID">
+                <button>Add Flight</button>
+            </form>
+
+            <form id="search-flight-form">
+                <input type="text" name="routeid" placeholder="route ID">
+                <button>Search</button>
+            </form>
+
+            <ul id="flight-list"></ul>
+
+        </div>
+
         <script>
             // Your web app's Firebase configuration
             var firebaseConfig = {

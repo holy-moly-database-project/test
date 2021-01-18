@@ -18,7 +18,7 @@ function renderRoute(doc){
     
 
     revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayRevise()");
+    revise.setAttribute("onclick", "displayRouteRevise()");
 
     li.appendChild(identity);
     li.appendChild(origin);
@@ -77,12 +77,12 @@ function renderRoute(doc){
     })
 }
 
-function displayRevise(){
-    let x = document.getElementById("reviseRouteForm");
-    if (x.style.display === "none"){
-        x.style.display = "block";
+function displayRouteRevise(){
+    let rrf = document.getElementById("reviseRouteForm");
+    if (rrf.style.display === "none"){
+        rrf.style.display = "block";
     } else {
-        x.style.display = "none";
+        rrf.style.display = "none";
     }
 }
 
