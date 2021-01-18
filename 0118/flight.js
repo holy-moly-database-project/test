@@ -1,6 +1,6 @@
-const flightList = document.getElementById("#flight-list")
-const flightForm = document.getElementById("#add-flight-form")
-const searchFlightForm = document.getElementById("#search-flight-form")
+const flightList = document.querySelector("#flight-list")
+const flightForm = document.querySelector("#add-flight-form")
+const searchFlightForm = document.querySelector("#search-flight-form")
 
 function renderFlight(doc){
     // setting adding page
@@ -12,9 +12,9 @@ function renderFlight(doc){
     let pilotID = document.createElement('span');
     let planeID = document.createElement('span');
     let cross = document.createElement('div');
-    let revise = document.createElement('button');
+    //let revise = document.createElement('button');
 
-    li.setAttribute('data_id', doc.id);
+    li.setAttribute('data-id', doc.id);
     flightID.textContent = doc.data().flightID;
     routeID.textContent = doc.data().routeID;
     departDate.textContent = doc.data().departDate;
@@ -22,8 +22,8 @@ function renderFlight(doc){
     pilotID.textContent = doc.data().pilotID;
     planeID.textContent = doc.data().planeID;
     cross.textContent = 'x';
-    revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayFlightsRevised()");
+    //revise.textContent = 'revise';
+    //revise.setAttribute("onclick", "displayFlightsRevised()");
 
     li.appendChild(flightID);
     li.appendChild(routeID);
@@ -32,9 +32,10 @@ function renderFlight(doc){
     li.appendChild(pilotID);
     li.appendChild(planeID);
     li.appendChild(cross);
-    li.appendChild(revise);
+    //li.appendChild(revise);
 
     // setting revise page
+    /*
     let reviseForm = document.createElement('form');
     reviseForm.id = "reviseRouteForm";
     reviseForm.style.display = "none";
@@ -79,7 +80,7 @@ function renderFlight(doc){
     reviseForm.appendChild(inputpilotID);
     reviseForm.appendChild(inputplaneID);
     reviseForm.appendChild(reviseButton);
-
+    */
     flightList.appendChild(li);
 
     ///deleting data
@@ -90,6 +91,7 @@ function renderFlight(doc){
     })
 
     // revising data
+    /*
     reviseForm.addEventListener('submit', (e) => {
         e.preventDefault();
         let id = e.target.parentElement.getAttribute('data-id');
@@ -108,8 +110,10 @@ function renderFlight(doc){
         reviseForm.inPilotID.value ='';
         reviseForm.inPlaneID.value ='';
     })
+    */
 }
 
+/*
 function displayFlightsRevised(){
     let frf = document.getElementById("reviseFlightForm");
     if(frf.style.display == "none"){
@@ -119,8 +123,10 @@ function displayFlightsRevised(){
         frf.style.display = "none";
     }
 }
+*/
 
-// saving data
+
+// adding data
 flightForm.addEventListener('submit', (e) => {
     e.preventDefault();
     db.collection('flights').add({
@@ -138,11 +144,13 @@ flightForm.addEventListener('submit', (e) => {
     flightForm.departTime.value = '';
     flightForm.pilotID.value = '';
     flightForm.planeID.value = '';
-});
+})
 
+/*
 let clearSearchFlight = document.createElement('button');
 clearSearchFlight.textContent = "clear";
 searchFlightForm.appendChild(clearSearchFlight);
+
 
 // search data
 searchFlightForm.addEventListener('submit', (e) => {
@@ -184,6 +192,7 @@ clearSearchFlight.addEventListener("click", (e) => {
     });
     searchFlightForm.id.value = '';
 });
+*/
 
 // real-time listener
 db.collection('flights').orderBy('flightID').onSnapshot(snapshot => {
