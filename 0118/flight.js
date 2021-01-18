@@ -84,14 +84,117 @@ function renderFlight(doc){
 
     ///deleting data
     cross.addEventListener('click', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); 
         let id = e.target.parentElement.getAttribute('data-id');
         db.collection('flights').doc(id).delete();
     })
-    
+
+    // revising data
+    reviseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let id = e.target.parentElement.getAttribute('data-id');
+        db.collection('flights').doc(id).update({
+            flightID: reviseForm.inFID.value,
+            routeID: reviseForm.inRID.value,
+            departDate: reviseForm.inDDate.value,
+            departTime: reviseForm.inDTime.value,
+            pilotID: reviseForm.inPilotID.value,
+            planeID: reviseForm.inPlaneID.value
+        });
+        reviseForm.inFID.value = '';
+        reviseForm.inRID.value = '';
+        reviseForm.inDDate.value ='';
+        reviseForm.inDTime.value ='';
+        reviseForm.inPilotID.value ='';
+        reviseForm.inPlaneID.value ='';
+    })
 }
 
+function displayFlightsRevised(){
+    let frf = document.getElementById("reviseFlightForm");
+    if(frf.style.display == "none"){
+        frf.style.display = "block";
+    }
+    else{
+        frf.style.display = "none";
+    }
+}
+
+// saving data
 flightForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    //
+    db.collection('flights').add({
+        flightID: flightForm.flightID.value,
+        routeID: flightForm.routeID.value,
+        departDate: flightForm.departDate.value,
+        departTime: flightForm.departTime.value,
+        pilotID: flightForm.pilotID.value,
+        planeID: flightForm.planeID.value
+    });
+    //to empty the adding block
+    flightForm.flightID.value = '';
+    flightForm.routeID.value = '';
+    flightForm.departDate.value = '';
+    flightForm.departTime.value = '';
+    flightForm.pilotID.value = '';
+    flightForm.planeID.value = '';
 });
+
+let clearSearchFlight = document.createElement('button');
+clearSearchFlight.textContent = "clear";
+searchFlightForm.appendChild(clearSearchFlight);
+
+// search data
+searchFlightForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (flightList.firstChild){
+        flightList.removeChild(flightList.firstChild);
+    }
+    db.collection('flights').where('flightID', '==', searchFlightForm.id.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderFlight(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
+                flightList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearSearchFlight.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (flightList.firstChild){
+        flightList.removeChild(flightList.firstChild);
+    }
+    db.collection('flights').orderBy('flightID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderFlight(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
+                flightList.removeChild(li);
+            }
+        });
+    });
+    searchFlightForm.id.value = '';
+});
+
+// real-time listener
+db.collection('flights').orderBy('flightID').onSnapshot(snapshot => {
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        if (change.type == 'added'){
+            renderFlight(change.doc);
+        } 
+        else if (change.type == 'removed'){
+            let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
+            flightList.removeChild(li);
+        }
+    })
+})
