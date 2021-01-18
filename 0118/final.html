@@ -48,6 +48,30 @@
 
         <div class="content">
 
+            <form id="add-pilot-form">
+                <h2>Pilot</h2>
+                <input type="text" name="id" placeholder="pilot ID">
+                <input type="text" name="name" placeholder="name">
+                <label>gender: <input list="browsers" ></label>
+                <datalist id="browsers">
+                    <option value="Male"></option>
+                    <option value="Female"></option>
+                </datalist>
+                <input type="text" name="miles" placeholder="flight mileage">
+                <button>Add Pilot</button>
+            </form>
+
+            <form id="search-pilot-form">
+                <input type="text" name="id" placeholder="pilot ID">
+                <button>Search</button>
+            </form>
+
+            <ul id="pilot-list"></ul>
+
+        </div>
+
+        <div class="content">
+
             <form id="add-flight-form">
                 <h2>Flight</h2>
                 <input type="text" name="routeid" placeholder="route ID">
