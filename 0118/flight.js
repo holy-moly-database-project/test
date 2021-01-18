@@ -146,7 +146,7 @@ flightForm.addEventListener('submit', (e) => {
     flightForm.planeID.value = '';
 })
 
-/*
+
 let clearSearchFlight = document.createElement('button');
 clearSearchFlight.textContent = "clear";
 searchFlightForm.appendChild(clearSearchFlight);
@@ -158,7 +158,7 @@ searchFlightForm.addEventListener('submit', (e) => {
     while (flightList.firstChild){
         flightList.removeChild(flightList.firstChild);
     }
-    db.collection('flights').where('flightID', '==', searchFlightForm.id.value).onSnapshot(snapshot => {
+    db.collection('flights').where('flightID', '==', searchFlightForm.flightID.value).onSnapshot(snapshot => {
         let changes = snapshot.docChanges();
         changes.forEach(change => {
             if (change.type == 'added'){
@@ -192,7 +192,7 @@ clearSearchFlight.addEventListener("click", (e) => {
     });
     searchFlightForm.id.value = '';
 });
-*/
+
 
 // real-time listener
 db.collection('flights').orderBy('flightID').onSnapshot(snapshot => {
