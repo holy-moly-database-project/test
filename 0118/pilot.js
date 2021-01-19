@@ -130,9 +130,9 @@ pilotForm.addEventListener('submit', (e) => {
 })
 
 
-let clearSearch = document.createElement('button');
-clearSearch.textContent = "clear";
-searchPilotForm.appendChild(clearSearch);
+let clearPilotSearch = document.createElement('button');
+clearPilotSearch.textContent = "clear";
+searchPilotForm.appendChild(clearPilotSearch);
 
 // search data
 searchPilotForm.addEventListener('submit', (e) => {
@@ -154,7 +154,7 @@ searchPilotForm.addEventListener('submit', (e) => {
 });
 
 // clear data after search
-clearSearch.addEventListener("click", (e) => {
+clearPilotSearch.addEventListener("click", (e) => {
     e.preventDefault();
     while (pilotList.firstChild){
         pilotList.removeChild(pilotList.firstChild);
