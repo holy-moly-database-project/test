@@ -60,6 +60,47 @@ orderForm.addEventListener('submit', (e) => {
     orderForm.tID.value = '';
 })
 
+// search data
+searchOrderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (orderList.firstChild){
+        orderList.removeChild(orderList.firstChild);
+    }
+    db.collection('orders').where('ID', '==', searchOrderForm.id.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderOrder(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
+                orderList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearOrderSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (orderList.firstChild){
+        orderList.removeChild(orderList.firstChild);
+    }
+    db.collection('orders').orderBy('ID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderOrder(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
+                orderList.removeChild(li);
+            }
+        });
+    });
+    searchOrderForm.id.value = '';
+});
+
 // display all
 db.collection('orders').orderBy('ID').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
@@ -71,5 +112,5 @@ db.collection('orders').orderBy('ID').onSnapshot(snapshot => {
             let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
             orderList.removeChild(li);
         }
-    })
-})
+    });
+});

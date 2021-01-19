@@ -140,17 +140,49 @@ searchPilotForm.addEventListener('submit', (e) => {
     while (pilotList.firstChild){
         pilotList.removeChild(pilotList.firstChild);
     }
-    db.collection('pilots').where('ID', '==', searchPilotForm.id.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderPilot(change.doc);
-            } else if (change.type == 'removed'){
-                let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
-                pilotList.removeChild(li);
-            }
+
+    let searchID = searchPilotForm.id.value;
+    let searchName = searchPilotForm.name.value;
+    let searchGender = searchPilotForm.gender.value;
+
+    if (searchID != ''){
+        db.collection('pilots').where('ID', '==', searchID).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderPilot(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
+                    pilotList.removeChild(li);
+                }
+            });
         });
-    });
+    } else if (searchID == '' && searchName != '' && searchGender == ''){
+        db.collection('pilots').where('name', '==', searchName).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderPilot(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
+                    pilotList.removeChild(li);
+                }
+            });
+        });
+    } else if (searchID == '' && searchName == '' && searchGender != ''){
+        console.log(searchGender);
+        db.collection('pilots').where('gender', '==', searchGender).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderPilot(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
+                    pilotList.removeChild(li);
+                }
+            });
+        });
+    }
 });
 
 // clear data after search
@@ -171,6 +203,8 @@ clearPilotSearch.addEventListener("click", (e) => {
         });
     });
     searchPilotForm.id.value = '';
+    searchPilotForm.name.value ='';
+    searchPilotForm.gender.value = '';
 });
 
 // display all
