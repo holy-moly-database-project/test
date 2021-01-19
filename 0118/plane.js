@@ -27,6 +27,8 @@ function renderPlane(doc){
     });
 }
 
+
+//adding data
 planeForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
