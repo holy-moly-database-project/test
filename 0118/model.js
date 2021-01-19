@@ -79,10 +79,20 @@ function displayModelRevise(){
 // saving data (add new model)
 modelForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('models').add({
-        ID: modelForm.id.value,
-        seats: modelForm.seats.value
-    });
+    let repeated = false;
+    let inputID = modelForm.id.value;
+    let inputSeats = modelForm.seats.value;
+    db.collection('models').where('ID', '==', inputID).get().then(snapshot => {
+        if (!snapshot.empty){
+            repeated = true;
+            window.alert("You have entered a repeated ID, please enter again.")
+        } else {
+            db.collection('models').add({
+                ID: inputID,
+                seats: inputSeats
+            })
+        }
+    })
     modelForm.id.value = '';
     modelForm.seats.value = '';
 });
