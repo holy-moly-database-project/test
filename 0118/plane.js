@@ -66,18 +66,37 @@ searchPlaneForm.addEventListener('submit', (e) => {
     while (planeList.firstChild){
         planeList.removeChild(planeList.firstChild);
     }
-    db.collection('planes').where('ID', '==', searchPlaneForm.id.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderPlane(change.doc);
-            } 
-            else if (change.type == 'removed'){
-                let li = planeList.querySelector('[data-id=' + change.doc.id + ']');
-                planeList.removeChild(li);
-            }
+    let searchID = searchPlaneForm.id.value;
+    let searchmodelID = searchPlaneForm.mID.value;
+
+    if (searchID != ''){
+        db.collection('planes').where('ID', '==', searchPlaneForm.id.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderPlane(change.doc);
+                } 
+                else if (change.type == 'removed'){
+                    let li = planeList.querySelector('[data-id=' + change.doc.id + ']');
+                    planeList.removeChild(li);
+                }
+            });
         });
-    });
+    }
+    else if (searchID == '' && searchmodelID != ''){
+        db.collection('planes').where('mID', '==', searchPlaneForm.mID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderPlane(change.doc);
+                } 
+                else if (change.type == 'removed'){
+                    let li = planeList.querySelector('[data-id=' + change.doc.id + ']');
+                    planeList.removeChild(li);
+                }
+            });
+        });
+    }
 });
 
 // clear data after search
