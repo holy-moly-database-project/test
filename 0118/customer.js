@@ -37,10 +37,16 @@ customerForm.addEventListener('submit', (e) => {
          window.alert("Please enter with no space~");  
     }
     else{
-        db.collection('customers').add({
-        ID: inputID,
-        name: inputname,
-        });
+        db.collection('customers').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            } else {
+                db.collection('customers').add({
+                    ID: inputID,
+                    name: inputname
+                });
+            }
+        })
     }
     
     customerForm.id.value = '';

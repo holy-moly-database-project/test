@@ -42,11 +42,17 @@ orderForm.addEventListener('submit', (e) => {
     }
     
     else{
-        db.collection('orders').add({
-        ID: inputID,
-        cID: inputcustomerID,
-        tID: inputticketID
-        });
+        db.collection('orders').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            }else{
+                db.collection('orders').add({
+                    ID: inputID,
+                    cID: inputcustomerID,
+                    tID: inputticketID
+                });
+            }
+        })
     }
     
     orderForm.id.value = '';

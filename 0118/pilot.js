@@ -110,12 +110,18 @@ pilotForm.addEventListener('submit', (e) => {
     }
     
     else{
-        db.collection('pilots').add({
-            ID: inputID,
-            name: inputname,
-            miles: inputmiles,
-            gender: inputgender
-        });  
+        db.collection('pilots').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            }else{
+                db.collection('pilots').add({
+                    ID: inputID,
+                    name: inputname,
+                    miles: inputmiles, 
+                    gender: inputgender
+                });
+            }
+        })
     }    
     
     pilotForm.id.value = '';

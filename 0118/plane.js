@@ -39,10 +39,16 @@ planeForm.addEventListener('submit', (e) => {
          window.alert("Please enter with no space~");  
     }
     else{
-        db.collection('planes').add({
-        ID: inputID,
-        mID: inputmodelID,
-        });
+        db.collection('planes').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            }else{
+                db.collection('planes').add({
+                    ID: inputID,
+                    mID: inputmodelID
+                });
+            }
+        })
     }
 
     planeForm.id.value = '';
