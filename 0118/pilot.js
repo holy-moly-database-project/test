@@ -122,13 +122,56 @@ pilotForm.addEventListener('submit', (e) => {
                 });
             }
         })
-    }    
-    
+    }
     pilotForm.id.value = '';
     pilotForm.name.value = '';
     pilotForm.miles.value = '';
     pilotForm.gender.value = '';
 })
+
+
+let clearSearch = document.createElement('button');
+clearSearch.textContent = "clear";
+searchPilotForm.appendChild(clearSearch);
+
+// search data
+searchPilotForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (pilotList.firstChild){
+        pilotList.removeChild(pilotList.firstChild);
+    }
+    db.collection('pilots').where('ID', '==', searchPilotForm.id.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderPilot(change.doc);
+            } else if (change.type == 'removed'){
+                let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
+                pilotList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (pilotList.firstChild){
+        pilotList.removeChild(pilotList.firstChild);
+    }
+    db.collection('pilots').orderBy('ID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderPilot(change.doc);
+            } else if (change.type == 'removed'){
+                let li = pilotList.querySelector('[data-id=' + change.doc.id + ']');
+                pilotList.removeChild(li);
+            }
+        });
+    });
+    searchPilotForm.id.value = '';
+});
 
 // display all
 db.collection('pilots').orderBy('ID').onSnapshot(snapshot => {
