@@ -9,8 +9,8 @@ function renderTicket(doc){
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
-    ID.textContent = doc.data().ID;
-    flightID.textContent = doc.data().flightID;
+    ID.textContent = 'ticket ID: ' + doc.data().ID;
+    flightID.textContent = 'flight ID: ' + doc.data().flightID;
     cross.textContent = 'x';
 
     li.appendChild(ID);
