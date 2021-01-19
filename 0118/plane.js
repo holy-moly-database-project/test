@@ -55,6 +55,47 @@ planeForm.addEventListener('submit', (e) => {
     planeForm.mID.value = '';
 });
 
+// search data
+searchPlaneForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (planeList.firstChild){
+        planeList.removeChild(planeList.firstChild);
+    }
+    db.collection('planes').where('ID', '==', searchPlaneForm.id.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderPlane(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = planeList.querySelector('[data-id=' + change.doc.id + ']');
+                planeList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearPlaneSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (planeList.firstChild){
+        planeList.removeChild(planeList.firstChild);
+    }
+    db.collection('planes').orderBy('ID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderPlane(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = planeList.querySelector('[data-id=' + change.doc.id + ']');
+                planeList.removeChild(li);
+            }
+        });
+    });
+    searchPlaneForm.id.value = '';
+});
+
 
 
 // display all
