@@ -7,43 +7,43 @@ function renderModel(doc){
     let modelID = document.createElement('span');
     let seats = document.createElement('span');
     let cross = document.createElement('div');
-    let revise = document.createElement('button');
+    // let revise = document.createElement('button');
 
     li.setAttribute('data-id', doc.id);
-    modelID.textContent = doc.data().ID;
-    seats.textContent = doc.data().seats;
+    modelID.textContent = 'ID: ' + doc.data().ID;
+    seats.textContent = 'seats: ' + doc.data().seats;
     cross.textContent = 'x';
 
-    revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayModelRevise()");
+    // revise.textContent = 'revise';
+    // revise.setAttribute("onclick", "displayModelRevise()");
 
     li.appendChild(modelID);
     li.appendChild(seats);
     li.appendChild(cross);
-    li.appendChild(revise);
+    // li.appendChild(revise);
 
-    let reviseForm = document.createElement('form');
-    reviseForm.id = "reviseModelForm";
-    reviseForm.style.display = "none";
+    // let reviseForm = document.createElement('form');
+    // reviseForm.id = "reviseModelForm";
+    // reviseForm.style.display = "none";
 
-    let inputID = document.createElement('input');
-    inputID.setAttribute("type", "text");
-    inputID.setAttribute("name", "inid");
-    inputID.setAttribute("placeholder", "model ID");
+    // let inputID = document.createElement('input');
+    // inputID.setAttribute("type", "text");
+    // inputID.setAttribute("name", "inid");
+    // inputID.setAttribute("placeholder", "model ID");
 
-    let inputSeats = document.createElement('input');
-    inputSeats.setAttribute("type", "text");
-    inputSeats.setAttribute("name", "inseat")
-    inputSeats.setAttribute("placeholder", "seats");
+    // let inputSeats = document.createElement('input');
+    // inputSeats.setAttribute("type", "text");
+    // inputSeats.setAttribute("name", "inseat")
+    // inputSeats.setAttribute("placeholder", "seats");
 
-    let reviseButton = document.createElement('button');
-    reviseButton.textContent = 'submit';
+    // let reviseButton = document.createElement('button');
+    // reviseButton.textContent = 'submit';
 
-    reviseForm.appendChild(inputID);
-    reviseForm.appendChild(inputSeats);
-    reviseForm.appendChild(reviseButton);
+    // reviseForm.appendChild(inputID);
+    // reviseForm.appendChild(inputSeats);
+    // reviseForm.appendChild(reviseButton);
 
-    li.appendChild(reviseForm);
+    // li.appendChild(reviseForm);
 
     modelList.appendChild(li);
 
@@ -54,17 +54,17 @@ function renderModel(doc){
         db.collection('models').doc(id).delete();
     });
 
-    // revising data
-    reviseForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let id = e.target.parentElement.getAttribute('data-id');
-        db.collection('models').doc(id).update({
-            ID: reviseForm.inid.value,
-            seats: reviseForm.inseat.value
-        });
-        reviseForm.inid.value = '';
-        reviseForm.inseat.value = '';
-    })
+    // // revising data
+    // reviseForm.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     let id = e.target.parentElement.getAttribute('data-id');
+    //     db.collection('models').doc(id).update({
+    //         ID: reviseForm.inid.value,
+    //         seats: reviseForm.inseat.value
+    //     });
+    //     reviseForm.inid.value = '';
+    //     reviseForm.inseat.value = '';
+    // })
 }
 
 function displayModelRevise(){

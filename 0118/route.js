@@ -8,50 +8,50 @@ function renderRoute(doc){
     let origin = document.createElement('span');
     let destination = document.createElement('span');
     let cross = document.createElement('div');
-    let revise = document.createElement('button');
+    // let revise = document.createElement('button');
 
     li.setAttribute('data-id', doc.id);
-    identity.textContent = doc.data().ID;
-    origin.textContent = doc.data().origin;
-    destination.textContent = doc.data().destination;
+    identity.textContent = 'ID: ' + doc.data().ID;
+    origin.textContent = 'origin: ' + doc.data().origin;
+    destination.textContent = 'destination: ' + doc.data().destination;
     cross.textContent = 'x';
     
 
-    revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayRouteRevise()");
+    // revise.textContent = 'revise';
+    // revise.setAttribute("onclick", "displayRouteRevise()");
 
     li.appendChild(identity);
     li.appendChild(origin);
     li.appendChild(destination);
     li.appendChild(cross);
-    li.appendChild(revise);
+    // li.appendChild(revise);
 
-    let reviseForm = document.createElement('form');
-    reviseForm.id = "reviseRouteForm";
-    reviseForm.style.display = "none";
+    // let reviseForm = document.createElement('form');
+    // reviseForm.id = "reviseRouteForm";
+    // reviseForm.style.display = "none";
 
-    let inputID = document.createElement('input');
-    inputID.setAttribute("type", "text");
-    inputID.setAttribute("name", "inid");
-    inputID.setAttribute("placeholder", "route ID");
+    // let inputID = document.createElement('input');
+    // inputID.setAttribute("type", "text");
+    // inputID.setAttribute("name", "inid");
+    // inputID.setAttribute("placeholder", "route ID");
 
-    let inputOrigin = document.createElement('input');
-    inputOrigin.setAttribute("type", "text");
-    inputOrigin.setAttribute("name", "inorigin")
-    inputOrigin.setAttribute("placeholder", "origin");
+    // let inputOrigin = document.createElement('input');
+    // inputOrigin.setAttribute("type", "text");
+    // inputOrigin.setAttribute("name", "inorigin")
+    // inputOrigin.setAttribute("placeholder", "origin");
 
-    let inputDestination = document.createElement('input');
-    inputDestination.setAttribute("type", "text");
-    inputDestination.setAttribute("name", "indes");
-    inputDestination.setAttribute("placeholder", "destination");
+    // let inputDestination = document.createElement('input');
+    // inputDestination.setAttribute("type", "text");
+    // inputDestination.setAttribute("name", "indes");
+    // inputDestination.setAttribute("placeholder", "destination");
 
-    let reviseButton = document.createElement('button');
-    reviseButton.textContent = 'submit';
+    // let reviseButton = document.createElement('button');
+    // reviseButton.textContent = 'submit';
 
-    reviseForm.appendChild(inputID);
-    reviseForm.appendChild(inputOrigin);
-    reviseForm.appendChild(inputDestination)
-    reviseForm.appendChild(reviseButton);
+    // reviseForm.appendChild(inputID);
+    // reviseForm.appendChild(inputOrigin);
+    // reviseForm.appendChild(inputDestination)
+    // reviseForm.appendChild(reviseButton);
 
     routeList.appendChild(li);
 
@@ -62,19 +62,19 @@ function renderRoute(doc){
         db.collection('routes').doc(id).delete();
     })
 
-    // revising data
-    reviseForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        let id = e.target.parentElement.getAttribute('data-id');
-        db.collection('routes').doc(id).update({
-            ID: reviseForm.inid.value,
-            origin: reviseForm.inorigin.value,
-            destination: reviseForm.indes.value
-        });
-        reviseForm.inid.value = '';
-        reviseForm.inorigin.value = '';
-        reviseForm.indes.value ='';
-    })
+    // // revising data
+    // reviseForm.addEventListener('submit', (e) => {
+    //     e.preventDefault();
+    //     let id = e.target.parentElement.getAttribute('data-id');
+    //     db.collection('routes').doc(id).update({
+    //         ID: reviseForm.inid.value,
+    //         origin: reviseForm.inorigin.value,
+    //         destination: reviseForm.indes.value
+    //     });
+    //     reviseForm.inid.value = '';
+    //     reviseForm.inorigin.value = '';
+    //     reviseForm.indes.value ='';
+    // })
 }
 
 function displayRouteRevise(){

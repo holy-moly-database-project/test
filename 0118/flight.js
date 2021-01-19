@@ -15,12 +15,12 @@ function renderFlight(doc){
     //let revise = document.createElement('button');
 
     li.setAttribute('data-id', doc.id);
-    flightID.textContent = doc.data().flightID;
-    routeID.textContent = doc.data().routeID;
-    departDate.textContent = doc.data().departDate;
-    departTime.textContent = doc.data().departTime;
-    pilotID.textContent = doc.data().pilotID;
-    planeID.textContent = doc.data().planeID;
+    flightID.textContent = 'flight ID: '+ doc.data().flightID;
+    routeID.textContent = 'route ID: ' + doc.data().routeID;
+    departDate.textContent = 'departure date: ' + doc.data().departDate;
+    departTime.textContent = 'departure time: ' + doc.data().departTime;
+    pilotID.textContent = 'pilot ID: ' + doc.data().pilotID;
+    planeID.textContent = 'plane ID: ' + doc.data().planeID;
     cross.textContent = 'x';
     //revise.textContent = 'revise';
     //revise.setAttribute("onclick", "displayFlightsRevised()");

@@ -9,8 +9,8 @@ function renderCustomer(doc){
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
-    identity.textContent = doc.data().ID;
-    name.textContent = doc.data().name;
+    identity.textContent = 'ID: ' + doc.data().ID;
+    name.textContent = 'name: ' + doc.data().name;
     cross.textContent = 'x';
 
     li.appendChild(identity);
