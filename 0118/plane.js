@@ -27,16 +27,26 @@ function renderPlane(doc){
     });
 }
 
-// adding data
 planeForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('planes').add({
-        ID: planeForm.id.value,
-        mID: planeForm.mID.value,
-    });
+    
+    let inputID = planeForm.id.value;
+    let inputmID = planeForm.mID.value;
+
+    if(inputID == "" || inputmID == "" ){
+         window.alert("Please enter with no space~");  
+    }
+    else{
+        db.collection('planes').add({
+        ID: inputID,
+        mID: inputmID
+        });
+    }
     planeForm.id.value = '';
     planeForm.mID.value = '';
-})
+});
+
+
 
 // display all
 db.collection('planes').orderBy('ID').onSnapshot(snapshot => {
