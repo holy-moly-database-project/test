@@ -89,11 +89,21 @@ function displayRouteRevise(){
 // saving data
 routeForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('routes').add({
-        ID: routeForm.id.value,
-        origin: routeForm.origin.value,
-        destination: routeForm.destination.value
-    });
+    
+    let inputID = routeForm.id.value;
+    let inputorigin = routeForm.origin.value;
+    let inputdes = routeForm.destination.value;
+
+    if(inputID == "" || inputorigin == "" || inputdes == ""){
+         window.alert("Please enter with no space~");  
+    }
+    else{
+        db.collection('routes').add({
+        ID: inputID,
+        origin: inputorigin,
+        destination: inputdes
+        });
+    }
     routeForm.id.value = '';
     routeForm.origin.value = '';
     routeForm.destination.value = '';
