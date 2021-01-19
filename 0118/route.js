@@ -131,7 +131,7 @@ searchRouteForm.addEventListener('submit', (e) => {
     let searchDestin = searchRouteForm.destination.value;
 
     if (searchID != ''){
-        db.collection('routes').where('ID', '==', searchRouteForm.id.value).onSnapshot(snapshot => {
+        db.collection('routes').where('ID', '==', searchID).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach(change => {
                 if (change.type == 'added'){
@@ -142,8 +142,8 @@ searchRouteForm.addEventListener('submit', (e) => {
                 }
             });
         });
-    } else if (searchID == '' && searchOrigin != '' && searchDestin == ''){
-        db.collection('routes').where('origin', '==', searchRouteForm.origin.value).onSnapshot(snapshot => {
+    } else if (searchOrigin != '' && searchDestin == ''){
+        db.collection('routes').where('origin', '==', searchOrigin).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach(change => {
                 if (change.type == 'added'){
@@ -154,8 +154,8 @@ searchRouteForm.addEventListener('submit', (e) => {
                 }
             });
         });
-    } else if (searchID == '' && searchOrigin == '' && searchDestin != ''){
-        db.collection('routes').where('destination', '==', searchRouteForm.destination.value).onSnapshot(snapshot => {
+    } else if (searchOrigin == '' && searchDestin != ''){
+        db.collection('routes').where('destination', '==', searchDestin).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach(change => {
                 if (change.type == 'added'){
@@ -166,9 +166,9 @@ searchRouteForm.addEventListener('submit', (e) => {
                 }
             });
         });
-    } else if (searchID == '' && searchOrigin != '' && searchDestin != ''){
-        db.collection('routes').where('origin', '==', searchRouteForm.origin.value)
-        .where('destination', '==', searchRouteForm.destination.value).onSnapshot(snapshot => {
+    } else if (searchOrigin != '' && searchDestin != ''){
+        db.collection('routes').where('origin', '==', searchOrigin)
+        .where('destination', '==', searchDestin).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach(change => {
                 if (change.type == 'added'){
@@ -201,6 +201,8 @@ clearSearchRoute.addEventListener("click", (e) => {
         });
     });
     searchRouteForm.id.value = '';
+    searchRouteForm.origin.value = '';
+    searchRouteForm.destination.value = '';
 });
 
 // real-time listener
