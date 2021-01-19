@@ -100,12 +100,24 @@ function renderPilot(doc){
 // adding data
 pilotForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('pilots').add({
-        ID: pilotForm.id.value,
-        name: pilotForm.name.value,
-        miles: pilotForm.miles.value,
-        gender: pilotForm.gender.value
-    });
+    let inputID = pilotForm.id.value;
+    let inputname = pilotForm.name.value;
+    let inputmiles = pilotForm.miles.value;
+    let inputgender = pilotForm.gender.value;
+
+    if(inputID == "" || inputname == "" || inputmiles == "" || inputgender == ""){
+         window.alert("Please enter with no space~");  
+    }
+    
+    else{
+        db.collection('pilots').add({
+            ID: inputID,
+            name: inputname,
+            miles: inputmiles,
+            gender: inputgender
+        });  
+    }    
+    
     pilotForm.id.value = '';
     pilotForm.name.value = '';
     pilotForm.miles.value = '';
