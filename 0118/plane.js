@@ -31,19 +31,20 @@ function renderPlane(doc){
 //adding data
 planeForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    let inputID = planeForm.id.value;
-    let inputmID = planeForm.mID.value;
 
-    if(inputID == "" || inputmID == "" ){
+    let inputID = planeForm.id.value;
+    let inputmodelID = planeForm.mID.value;
+
+    if(inputID == "" || inputmodelID == ""){
          window.alert("Please enter with no space~");  
     }
     else{
         db.collection('planes').add({
         ID: inputID,
-        mID: inputmID
+        mID: inputmodelID,
         });
     }
+
     planeForm.id.value = '';
     planeForm.mID.value = '';
 });

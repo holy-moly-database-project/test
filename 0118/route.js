@@ -98,11 +98,17 @@ routeForm.addEventListener('submit', (e) => {
          window.alert("Please enter with no space~");  
     }
     else{
-        db.collection('routes').add({
-        ID: inputID,
-        origin: inputorigin,
-        destination: inputdes
-        });
+        db.collection('routes').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            }else{
+                db.collection('routes').add({
+                    ID: inputID,
+                    origin: inputorigin,
+                    destination: inputdes
+                });
+            }
+        })
     }
     routeForm.id.value = '';
     routeForm.origin.value = '';
