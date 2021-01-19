@@ -37,7 +37,7 @@ ul{
 #route-list li span {
   display: block;
   float: left;
-  padding-left: 20%;
+  padding-left: 14%;
 }
 
 #model-list li span {
@@ -45,6 +45,24 @@ ul{
   float: left;
   padding-left: 28%;
 
+}
+
+#pilot-list li span {
+  display: block;
+  float: left;
+  padding-left: 3%;
+}
+
+#flight-list li span {
+  display: block;
+  float: left;
+  padding-left: 3%;
+}
+
+#plane-list li span {
+  display: block;
+  float: left;
+  padding-left: 20%;
 }
 
 li{
