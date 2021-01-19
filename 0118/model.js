@@ -82,14 +82,19 @@ modelForm.addEventListener('submit', (e) => {
     let inputID = modelForm.id.value;
     let inputSeats = modelForm.seats.value;
     db.collection('models').where('ID', '==', inputID).get().then(snapshot => {
-        if (!snapshot.empty){
+        if(inputID == "" || inputSeats == ""){
+            window.alert("Please enter with no space~");  
+       }
+       else{
+           if (!snapshot.empty){
             window.alert("You have entered a repeated ID, please enter again.")
-        } else {
-            db.collection('models').add({
-                ID: inputID,
-                seats: inputSeats
-            })
-        }
+            } else {
+                db.collection('models').add({
+                    ID: inputID,
+                    seats: inputSeats
+                })
+            }
+       }
     })
     modelForm.id.value = '';
     modelForm.seats.value = '';

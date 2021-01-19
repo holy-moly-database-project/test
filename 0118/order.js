@@ -33,11 +33,22 @@ function renderOrder(doc){
 // adding data
 orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('orders').add({
-        ID: orderForm.id.value,
-        cID: orderForm.cID.value,
-        tID: orderForm.tID.value
-    });
+    let inputID = orderForm.id.value;
+    let inputcustomerID = orderForm.cID.value;
+    let inputticketID = orderForm.tID.value;
+
+    if(inputID == "" || inputcustomerID == "" || inputticketID == ""){
+         window.alert("Please enter with no space~");  
+    }
+    
+    else{
+        db.collection('orders').add({
+        ID: inputID,
+        cID: inputcustomerID,
+        tID: inputticketID
+        });
+    }
+    
     orderForm.id.value = '';
     orderForm.cID.value = '';
     orderForm.tID.value = '';

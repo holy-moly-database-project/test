@@ -129,14 +129,28 @@ function displayFlightsRevised(){
 // adding data
 flightForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('flights').add({
-        flightID: flightForm.flightID.value,
-        routeID: flightForm.routeID.value,
-        departDate: flightForm.departDate.value,
-        departTime: flightForm.departTime.value,
-        pilotID: flightForm.pilotID.value,
-        planeID: flightForm.planeID.value
-    });
+    let inputID = flightForm.flightID.value;
+    let inputrouteID = flightForm.routeID.value;
+    let inputdepDate = flightForm.departDate.value;
+    let inputdepTime = flightForm.departTime.value;
+    let inputpilotID = flightForm.pilotID.value;
+    let inputplaneID = flightForm.planeID.value;
+
+    if(inputID == "" || inputrouteID == "" || inputdepDate == ""
+       || inputdepTime == "" || inputpilotID == "" || inputplaneID == ""){
+         window.alert("Please enter with no space~");  
+    }
+    else{
+       db.collection('routes').add({
+        flightID: inputID,
+        routeID: inputrouteID,
+        departDate: inputdepDate,
+        departTime: inputdepTime,
+        pilotID: inputpilotID,
+        planeID: inputplaneID
+        }); 
+    }
+    
     //to empty the adding block
     flightForm.flightID.value = '';
     flightForm.routeID.value = '';

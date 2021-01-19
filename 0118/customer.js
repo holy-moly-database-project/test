@@ -30,10 +30,19 @@ function renderCustomer(doc){
 // adding data
 customerForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('customers').add({
-        ID: customerForm.id.value,
-        name: customerForm.name.value,
-    });
+    let inputID = customerForm.id.value;
+    let inputname = customerForm.name.value;
+
+    if(inputID == "" || inputname == ""){
+         window.alert("Please enter with no space~");  
+    }
+    else{
+        db.collection('customers').add({
+        ID: inputID,
+        name: inputname,
+        });
+    }
+    
     customerForm.id.value = '';
     customerForm.name.value = '';
 })
