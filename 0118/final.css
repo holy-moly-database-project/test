@@ -57,12 +57,19 @@ ul{
   display: block;
   float: left;
   padding-left: 3%;
+  line-height: 1.5;
 }
 
 #plane-list li span {
   display: block;
   float: left;
   padding-left: 20%;
+}
+
+#order-list li span {
+  display: block;
+  float: left;
+  padding-left: 5%;
 }
 
 li{
