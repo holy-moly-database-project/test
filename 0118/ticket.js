@@ -39,14 +39,20 @@ ticketForm.addEventListener('submit', (e) => {
     }
     
     else{
-        db.collection('tickets').add({
-        ID: inputID,
-        flightID: inputflightID
-        });
+        db.collection('tickets').where('ID', '==', inputID).get().then(snapshot => {
+            if (!snapshot.empty){
+                window.alert("You have entered a repeated ID, please enter again.");
+            }else{
+                db.collection('tickets').add({
+                    ID: inputID,
+                    flightID: inputflightID
+                });
+            }
+        })
     }
     
-    customerForm.ID.value = '';
-    customerForm.flightID.value = '';
+    ticketForm.ID.value = '';
+    ticketForm.flightID.value = '';
 })
 
 // display all
