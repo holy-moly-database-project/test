@@ -9,8 +9,8 @@ function renderPlane(doc){
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
-    identity.textContent = doc.data().ID;
-    mID.textContent = doc.data().mID;
+    identity.textContent = 'plane ID: ' + doc.data().ID;
+    mID.textContent = 'model ID: ' + doc.data().mID;
     cross.textContent = 'x';
 
     li.appendChild(identity);

@@ -10,9 +10,9 @@ function renderOrder(doc){
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
-    identity.textContent = doc.data().ID;
-    cID.textContent = doc.data().cID;
-    tID.textContent = doc.data().tID;
+    identity.textContent = 'order ID: ' + doc.data().ID;
+    cID.textContent = 'customer ID: ' + doc.data().cID;
+    tID.textContent = 'ticket ID: ' + doc.data().tID;
     cross.textContent = 'x';
 
     li.appendChild(identity);
