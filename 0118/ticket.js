@@ -66,17 +66,35 @@ searchTicketForm.addEventListener('submit', (e) => {
     while (ticketList.firstChild){
         ticketList.removeChild(ticketList.firstChild);
     }
-    db.collection('tickets').where('ID', '==', searchTicketForm.ID.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderTicket(change.doc);
-            } else if (change.type == 'removed'){
-                let li = ticketList.querySelector('[data-id=' + change.doc.id + ']');
-                ticketList.removeChild(li);
-            }
+
+    let searchID = searchTicketForm.ID.value;
+    let searchFlightID = searchTicketForm.flightID.value;
+
+    if (searchID != ''){
+        db.collection('tickets').where('ID', '==', searchTicketForm.ID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderTicket(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = ticketList.querySelector('[data-id=' + change.doc.id + ']');
+                    ticketList.removeChild(li);
+                }
+            });
         });
-    });
+    } else if (searchID == '' && searchFlightID != ''){
+        db.collection('tickets').where('flightID', '==', searchTicketForm.flightID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderTicket(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = ticketList.querySelector('[data-id=' + change.doc.id + ']');
+                    ticketList.removeChild(li);
+                }
+            });
+        });
+    }
 });
 
 // clear data after search
@@ -97,6 +115,7 @@ clearTicketSearch.addEventListener("click", (e) => {
         });
     });
     searchTicketForm.ID.value = '';
+    searchTicketForm.flightID.value = '';
 });
 
 
