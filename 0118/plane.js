@@ -118,6 +118,7 @@ clearPlaneSearch.addEventListener("click", (e) => {
         });
     });
     searchPlaneForm.id.value = '';
+    searchPlaneForm.mID.value = '';
 });
 
 
