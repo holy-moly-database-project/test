@@ -31,7 +31,7 @@ function renderTicket(doc){
 ticketForm.addEventListener('submit', (e) => {
     e.preventDefault();
     db.collection('tickets').add({
-        ID: ticketForm.id.value,
+        ID: ticketForm.ID.value,
         flightID: ticketForm.flightID.value,
     });
     customerForm.ID.value = '';
