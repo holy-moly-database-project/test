@@ -75,13 +75,19 @@ ul{
 #plane-list li span {
   display: block;
   float: left;
-  padding-left: 23%;
+  padding-left: 25%;
 }
 
 #order-list li span {
   display: block;
   float: left;
-  padding-left: 12%;
+  padding-left: 13%;
+}
+
+#ticket-list li span {
+  display: block;
+  float: left;
+  padding-left: 25%;
 }
 
 li{
