@@ -9,6 +9,7 @@ function renderPilot(doc){
     let miles = document.createElement('span');
     let gender = document.createElement('span');
     let cross = document.createElement('div');
+    let revise = document.createElement('button');
 
     li.setAttribute('data-id', doc.id);
     identity.textContent = doc.data().ID;
@@ -17,11 +18,43 @@ function renderPilot(doc){
     gender.textContent = doc.data().gender;
     cross.textContent = 'x';
 
+    revise.textContent = 'revise';
+    // revise.setAttribute('onclick', 'displayPilotRevise()');
+
     li.appendChild(identity)
     li.appendChild(name);
     li.appendChild(miles);
     li.appendChild(gender);
     li.appendChild(cross);
+    li.appendChild(revise);
+
+    let reviseForm = document.createElement('form');
+    reviseForm.id = 'revisePilotForm';
+    //reviseForm.style.display = 'none';
+
+    let inputID = document.createElement('input');
+    inputID.setAttribute('type', 'text');
+    inputID.setAttribute('name', 'inid');
+    inputID.setAttribute('placeholder', 'pilot ID');
+
+    let inputName = document.createElement('input');
+    inputName.setAttribute('type', 'text');
+    inputName.setAttribute('name', 'inname');
+    inputName.setAttribute('placeholder', 'name');
+
+    let inputMiles = document.createElement('input');
+    inputMiles.setAttribute('type', 'text');
+    inputMiles.setAttribute('name', 'inmiles');
+    inputMiles.setAttribute('placeholder', 'miles');
+
+    let inputGender = document.createElement('input');
+    //
+
+    reviseForm.appendChild(inputID);
+    reviseForm.appendChild(inputName);
+    reviseForm.appendChild(inputMiles);
+    reviseForm.appendChild(inputGender);
+    li.appendChild(reviseForm);
 
     pilotList.appendChild(li);
 
@@ -31,6 +64,10 @@ function renderPilot(doc){
         let id = e.target.parentElement.getAttribute('data-id');
         db.collection('pilots').doc(id).delete();
     });
+}
+
+function displayPilotRevise(){
+    //
 }
 
 // adding data

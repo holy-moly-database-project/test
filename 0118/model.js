@@ -15,7 +15,7 @@ function renderModel(doc){
     cross.textContent = 'x';
 
     revise.textContent = 'revise';
-    revise.setAttribute("onclick", "displayModelRevise");
+    revise.setAttribute("onclick", "displayModelRevise()");
 
     li.appendChild(modelID);
     li.appendChild(seats);
