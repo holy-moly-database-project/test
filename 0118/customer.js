@@ -133,6 +133,7 @@ clearCustomerSearch.addEventListener("click", (e) => {
         });
     });
     searchCustomerForm.id.value = '';
+    searchCustomerForm.name.value = '';
 });
 
 // display all
