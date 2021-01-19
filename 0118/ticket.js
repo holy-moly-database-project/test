@@ -55,6 +55,51 @@ ticketForm.addEventListener('submit', (e) => {
     ticketForm.flightID.value = '';
 })
 
+
+let clearTicketSearch = document.createElement('button');
+clearTicketSearch.textContent = "clear";
+searchTicketForm.appendChild(clearTicketSearch);
+
+// search data
+searchTicketForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (ticketList.firstChild){
+        ticketList.removeChild(ticketList.firstChild);
+    }
+    db.collection('tickets').where('ID', '==', searchTicketForm.ID.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderTicket(change.doc);
+            } else if (change.type == 'removed'){
+                let li = ticketList.querySelector('[data-id=' + change.doc.id + ']');
+                ticketList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearTicketSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (ticketList.firstChild){
+        ticketList.removeChild(ticketList.firstChild);
+    }
+    db.collection('tickets').orderBy('ID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderTicket(change.doc);
+            } else if (change.type == 'removed'){
+                let li = ticketList.querySelector('[data-id=' + change.doc.id + ']');
+                ticketList.removeChild(li);
+            }
+        });
+    });
+    searchTicketForm.ID.value = '';
+});
+
+
 // display all
 db.collection('tickets').orderBy('ID').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
