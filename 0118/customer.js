@@ -63,19 +63,56 @@ searchCustomerForm.addEventListener('submit', (e) => {
     while (customerList.firstChild){
         customerList.removeChild(customerList.firstChild);
     }
-    db.collection('customers').where('ID', '==', searchCustomerForm.id.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderCustomer(change.doc);
-            } 
-            else if (change.type == 'removed'){
-                let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
-                customerList.removeChild(li);
-            }
+
+    let searchID = searchCustomerForm.id.value;
+    let searchName = searchCustomerForm.name.value;
+
+    if (searchID != ''){
+        db.collection('customers').where('ID', '==', searchCustomerForm.id.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderCustomer(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
+                    customerList.removeChild(li);
+                }
+            });
         });
-    });
+    } else if (searchID == '' && searchName != ''){
+        db.collection('customers').where('name', '==', searchCustomerForm.name.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderCustomer(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
+                    customerList.removeChild(li);
+                }
+            });
+        });
+    }
 });
+
+
+// searchCustomerForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     while (customerList.firstChild){
+//         customerList.removeChild(customerList.firstChild);
+//     }
+//     db.collection('customers').where('ID', '==', searchCustomerForm.id.value).onSnapshot(snapshot => {
+//         let changes = snapshot.docChanges();
+//         changes.forEach(change => {
+//             if (change.type == 'added'){
+//                 renderCustomer(change.doc);
+//             } 
+//             else if (change.type == 'removed'){
+//                 let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
+//                 customerList.removeChild(li);
+//             }
+//         });
+//     });
+// });
 
 // clear data after search
 clearCustomerSearch.addEventListener("click", (e) => {
