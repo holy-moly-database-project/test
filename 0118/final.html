@@ -128,6 +128,25 @@
 
         </div>
 
+        <div class="content">
+
+            <form id="add-order-form">
+                <h2>Order</h2>
+                <input type="text" name="id" placeholder="order ID">
+                <input type="text" name="cID" placeholder="customer ID">
+                <input type="text" name="tID" placeholder="ticket ID">
+                <button>Add Order</button>
+            </form>
+
+            <form id="search-order-form">
+                <input type="text" name="id" placeholder="order ID">
+                <button>Search</button>
+            </form>
+
+            <ul id="order-list"></ul>
+
+        </div>
+
         <script>
             // Your web app's Firebase configuration
             var firebaseConfig = {
@@ -149,5 +168,6 @@
         <script src="flight.js"></script>
         <script src="customer.js"></script>
         <script src="plane.js"></script>
+        <script src="order.js"></script>
     </body>
 </html>
