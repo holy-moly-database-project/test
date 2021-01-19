@@ -30,10 +30,21 @@ function renderTicket(doc){
 // adding data
 ticketForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    db.collection('tickets').add({
-        ID: ticketForm.ID.value,
-        flightID: ticketForm.flightID.value,
-    });
+    
+    let inputID = ticketForm.ID.value;
+    let inputflightID = ticketForm.flightID.value;
+
+    if(inputID == "" || inputflightID == ""){
+         window.alert("Please enter with no space~");  
+    }
+    
+    else{
+        db.collection('tickets').add({
+        ID: inputID,
+        flightID: inputflightID
+        });
+    }
+    
     customerForm.ID.value = '';
     customerForm.flightID.value = '';
 })
