@@ -70,18 +70,37 @@ searchOrderForm.addEventListener('submit', (e) => {
     while (orderList.firstChild){
         orderList.removeChild(orderList.firstChild);
     }
-    db.collection('orders').where('ID', '==', searchOrderForm.id.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderOrder(change.doc);
-            } 
-            else if (change.type == 'removed'){
-                let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
-                orderList.removeChild(li);
-            }
+    let searchID = searchOrderForm.id.value;
+    let searchcustomerID = searchOrderForm.cID.value;
+
+    if (searchID != ''){
+        db.collection('orders').where('ID', '==', searchOrderForm.id.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderOrder(change.doc);
+                } 
+                else if (change.type == 'removed'){
+                    let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
+                    orderList.removeChild(li);
+                }
+            });
         });
-    });
+    }
+    else if (searchID == '' && searchcustomerID != ''){
+        db.collection('orders').where('cID', '==', searchOrderForm.cID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderOrder(change.doc);
+                } 
+                else if (change.type == 'removed'){
+                    let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
+                    orderList.removeChild(li);
+                }
+            });
+        });
+    }
 });
 
 // clear data after search
@@ -103,6 +122,8 @@ clearOrderSearch.addEventListener("click", (e) => {
         });
     });
     searchOrderForm.id.value = '';
+    searchOrderForm.cID.value = '';
+
 });
 
 // display all
