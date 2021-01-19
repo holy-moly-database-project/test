@@ -195,7 +195,7 @@ searchFlightForm.addEventListener('submit', (e) => {
             });
         });
     } else if (searchID == '' && searchRouteID != ''){
-        db.collection('flights').where('routeID', '==', searchCustomerForm.routeID.value).onSnapshot(snapshot => {
+        db.collection('flights').where('routeID', '==', searchFlightForm.routeID.value).onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
             changes.forEach(change => {
                 if (change.type == 'added'){
