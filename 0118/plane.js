@@ -55,6 +55,11 @@ planeForm.addEventListener('submit', (e) => {
     planeForm.mID.value = '';
 });
 
+let clearPlaneSearch = document.createElement('button');
+clearPlaneSearch.textContent = "clear";
+searchPlaneForm.appendChild(clearPlaneSearch);
+
+
 // search data
 searchPlaneForm.addEventListener('submit', (e) => {
     e.preventDefault();

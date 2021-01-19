@@ -60,6 +60,10 @@ orderForm.addEventListener('submit', (e) => {
     orderForm.tID.value = '';
 })
 
+let clearOrderSearch = document.createElement('button');
+clearOrderSearch.textContent = "clear";
+searchOrderForm.appendChild(clearOrderSearch);
+
 // search data
 searchOrderForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -112,5 +116,5 @@ db.collection('orders').orderBy('ID').onSnapshot(snapshot => {
             let li = orderList.querySelector('[data-id=' + change.doc.id + ']');
             orderList.removeChild(li);
         }
-    });
-});
+    })
+})
