@@ -2,7 +2,7 @@ const ticketList = document.querySelector("#ticket-list");
 const ticketForm = document.querySelector("#add-ticket-form");
 const searchTicketForm = document.querySelector('#search-ticket-form');
 
-function renderCustomer(doc){
+function renderTicket(doc){
     let li = document.createElement('li');
     let ID = document.createElement('span');
     let flightID = document.createElement('span');
