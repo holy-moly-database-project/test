@@ -169,6 +169,11 @@ form input{
   width: 41%;
 }
 
+#search-model-form  input{
+  width: 69.5%;
+}
+
+
 #add-pilot-form input{
   width: 26.65%;
 }
@@ -182,6 +187,10 @@ form input{
   font-size: 15px;
 }
 
+#search-flight-form  input{
+  width: 33.7%;
+}
+
 #add-pilot-form input{
   width: 19.5%;
   font-size: 18px;
@@ -192,20 +201,41 @@ form input{
   font-size: 18px;
 }
 
+#search-customer-form  input{
+  width: 33.7%;
+}
+
+
 #add-plane-form input{
   width: 41%;
   font-size: 18px;
 }
+
+
+#search-plane-form  input{
+  width: 33.7%;
+}
+
 
 #add-order-form input{
   width: 26.65%;
   font-size: 18px;
 }
 
+#search-order-form  input{
+  width: 33.7%;
+}
+
+
 #add-ticket-form input{
   width: 41%;
   font-size: 18px;
 }
+
+#search-ticket-form  input{
+  width: 33.7%;
+}
+
 
 form input:focus{
   outline: none;
