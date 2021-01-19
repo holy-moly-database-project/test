@@ -173,6 +173,10 @@ form input{
   width: 26.65%;
 }
 
+#search-pilot-form  input{
+  width: 21.83%;
+}
+
 #add-flight-form input{
   width: 12.33%;
   font-size: 15px;
