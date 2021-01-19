@@ -141,7 +141,7 @@ flightForm.addEventListener('submit', (e) => {
          window.alert("Please enter with no space~");  
     }
     else{
-        db.collection('flights').where('ID', '==', inputID).get().then(snapshot => {
+        db.collection('flights').where('flightID', '==', inputID).get().then(snapshot => {
             if (!snapshot.empty){
                 window.alert("You have entered a repeated ID, please enter again.");
             }else{
@@ -178,18 +178,35 @@ searchFlightForm.addEventListener('submit', (e) => {
     while (flightList.firstChild){
         flightList.removeChild(flightList.firstChild);
     }
-    db.collection('flights').where('flightID', '==', searchFlightForm.flightID.value).onSnapshot(snapshot => {
-        let changes = snapshot.docChanges();
-        changes.forEach(change => {
-            if (change.type == 'added'){
-                renderFlight(change.doc);
-            } 
-            else if (change.type == 'removed'){
-                let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
-                flightList.removeChild(li);
-            }
+
+    let searchID = searchFlightForm.flightID.value;
+    let searchRouteID = searchFlightForm.routeID.value;
+
+    if (searchID != ''){
+        db.collection('flights').where('flightID', '==', searchFlightForm.flightID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderFlight(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
+                    flightList.removeChild(li);
+                }
+            });
         });
-    });
+    } else if (searchID == '' && searchRouteID != ''){
+        db.collection('flights').where('routeID', '==', searchCustomerForm.routeID.value).onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+                if (change.type == 'added'){
+                    renderFlight(change.doc);
+                } else if (change.type == 'removed'){
+                    let li = flightList.querySelector('[data-id=' + change.doc.id + ']');
+                    flightList.removeChild(li);
+                }
+            });
+        });
+    }
 });
 
 // clear data after search
@@ -210,7 +227,8 @@ clearSearchFlight.addEventListener("click", (e) => {
             }
         });
     });
-    searchFlightForm.id.value = '';
+    searchFlightForm.flightID.value = '';
+    searchFlightForm.routeID.value = '';
 });
 
 
