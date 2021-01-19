@@ -53,6 +53,51 @@ customerForm.addEventListener('submit', (e) => {
     customerForm.name.value = '';
 })
 
+let clearCustomerSearch = document.createElement('button');
+clearCustomerSearch.textContent = "clear";
+searchCustomerForm.appendChild(clearCustomerSearch);
+
+// search data
+searchCustomerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    while (customerList.firstChild){
+        customerList.removeChild(customerList.firstChild);
+    }
+    db.collection('customers').where('ID', '==', searchCustomerForm.id.value).onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderCustomer(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
+                customerList.removeChild(li);
+            }
+        });
+    });
+});
+
+// clear data after search
+clearCustomerSearch.addEventListener("click", (e) => {
+    e.preventDefault();
+    while (customerList.firstChild){
+        customerList.removeChild(customerList.firstChild);
+    }
+    db.collection('customers').orderBy('ID').onSnapshot(snapshot => {
+        let changes = snapshot.docChanges();
+        changes.forEach(change => {
+            if (change.type == 'added'){
+                renderCustomer(change.doc);
+            } 
+            else if (change.type == 'removed'){
+                let li = customerList.querySelector('[data-id=' + change.doc.id + ']');
+                customerList.removeChild(li);
+            }
+        });
+    });
+    searchCustomerForm.id.value = '';
+});
+
 // display all
 db.collection('customers').orderBy('ID').onSnapshot(snapshot => {
     let changes = snapshot.docChanges();
