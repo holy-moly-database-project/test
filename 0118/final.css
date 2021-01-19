@@ -161,6 +161,10 @@ form input{
   width: 26.65%;
 }
 
+#search-route-form  input{
+  width: 21.83%;
+}
+
 #add-model-form input{
   width: 41%;
 }
