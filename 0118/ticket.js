@@ -2,15 +2,15 @@ const ticketList = document.querySelector("#ticket-list");
 const ticketForm = document.querySelector("#add-ticket-form");
 const searchTicketForm = document.querySelector('#search-ticket-form');
 
-function renderCustomer(doc){
+function renderTicket(doc){
     let li = document.createElement('li');
     let ID = document.createElement('span');
     let flightID = document.createElement('span');
     let cross = document.createElement('div');
 
     li.setAttribute('data-id', doc.id);
-    ID.textContent = doc.data().ID;
-    flightID.textContent = doc.data().flightID;
+    ID.textContent = 'ticket ID: ' + doc.data().ID;
+    flightID.textContent = 'flight ID: ' + doc.data().flightID;
     cross.textContent = 'x';
 
     li.appendChild(ID);
@@ -31,7 +31,7 @@ function renderCustomer(doc){
 ticketForm.addEventListener('submit', (e) => {
     e.preventDefault();
     db.collection('tickets').add({
-        ID: ticketForm.id.value,
+        ID: ticketForm.ID.value,
         flightID: ticketForm.flightID.value,
     });
     customerForm.ID.value = '';
